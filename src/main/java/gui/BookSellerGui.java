@@ -18,21 +18,23 @@ package gui; /*****************************************************************
  *****************************************************************/
 
 import agent.BookSellerAgent;
-import jade.core.AID;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
- @author Giovanni Caire - TILAB
+ * @author Giovanni Caire - TILAB
  */
-class BookSellerGui extends JFrame {
+public class BookSellerGui extends JFrame {
     private BookSellerAgent myAgent;
 
     private JTextField titleField, priceField;
 
-    BookSellerGui(BookSellerAgent a) {
+    public BookSellerGui(BookSellerAgent a) {
         super(a.getLocalName());
 
         myAgent = a;
@@ -48,7 +50,7 @@ class BookSellerGui extends JFrame {
         getContentPane().add(p, BorderLayout.CENTER);
 
         JButton addButton = new JButton("Add");
-        addButton.addActionListener( new ActionListener() {
+        addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ev) {
                 try {
                     String title = titleField.getText().trim();
@@ -57,21 +59,21 @@ class BookSellerGui extends JFrame {
                     titleField.setText("");
                     priceField.setText("");
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(BookSellerGui.this, "Invalid values. "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(BookSellerGui.this, "Invalid values. " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        } );
+        });
         p = new JPanel();
         p.add(addButton);
         getContentPane().add(p, BorderLayout.SOUTH);
 
         // Make the agent terminate when the user closes
         // the GUI using the button on the upper right corner
-        addWindowListener(new   WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 myAgent.doDelete();
             }
-        } );
+        });
 
         setResizable(false);
     }
@@ -79,8 +81,8 @@ class BookSellerGui extends JFrame {
     public void show() {
         pack();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int centerX = (int)screenSize.getWidth() / 2;
-        int centerY = (int)screenSize.getHeight() / 2;
+        int centerX = (int) screenSize.getWidth() / 2;
+        int centerY = (int) screenSize.getHeight() / 2;
         setLocation(centerX - getWidth() / 2, centerY - getHeight() / 2);
         super.show();
     }

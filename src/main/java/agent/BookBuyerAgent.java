@@ -1,14 +1,15 @@
 package agent;
 
-import jade.core.Agent;
 import jade.core.AID;
-import jade.core.behaviours.*;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
+import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
-import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.FIPAException;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 
 public class BookBuyerAgent extends Agent {
     // The title of the book to buy
@@ -19,7 +20,7 @@ public class BookBuyerAgent extends Agent {
     // Put agent initializations here
     protected void setup() {
         // Printout a welcome message
-        System.out.println("Hallo! Buyer-agent " + getAID().getName() + " is ready.");
+        System.out.println("Hello! Buyer-agent " + getAID().getName() + " is ready.");
 
         // Get the title of the book to buy as a start-up argument
         Object[] args = getArguments();
